@@ -72,6 +72,7 @@ function AdmissionsPage() {
   const [school, setSchool] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [formMessage, setFormMessage] = useState("");
+  const selectedSchool = schools[school] ?? schools[0];
 
   function submitEnquiry(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -131,7 +132,7 @@ function AdmissionsPage() {
             <SectionHeading eyebrow="Find your direction" title="One campus. Many ways forward." copy="Explore undergraduate and postgraduate programs across high-growth disciplines." />
             <div className="mt-12 border-y border-border">
               <div className="flex gap-1 overflow-x-auto border-b border-border py-3" role="tablist">{schools.map((item, index) => <button key={item.name} role="tab" aria-selected={school === index} onClick={() => setSchool(index)} className={`min-h-11 shrink-0 rounded-sm px-4 text-sm font-semibold transition ${school === index ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted"}`}>{item.name}</button>)}</div>
-              <div className="grid gap-8 py-10 lg:grid-cols-[1fr_2fr]"><div><p className="text-sm uppercase tracking-[0.15em] text-magenta">School of</p><h3 className="mt-2 text-3xl font-bold">{schools[school].name}</h3></div><div className="grid gap-px bg-border sm:grid-cols-2">{schools[school].programs.map((program) => <a href={APPLY_URL} target="_blank" rel="noreferrer" key={program} className="group flex min-h-20 items-center justify-between bg-background px-5 font-semibold hover:bg-card">{program}<ArrowRight size={18} className="text-gold transition group-hover:translate-x-1" /></a>)}</div></div>
+              <div className="grid gap-8 py-10 lg:grid-cols-[1fr_2fr]"><div><p className="text-sm uppercase tracking-[0.15em] text-magenta">School of</p><h3 className="mt-2 text-3xl font-bold">{selectedSchool?.name}</h3></div><div className="grid gap-px bg-border sm:grid-cols-2">{selectedSchool?.programs.map((program) => <a href={APPLY_URL} target="_blank" rel="noreferrer" key={program} className="group flex min-h-20 items-center justify-between bg-background px-5 font-semibold hover:bg-card">{program}<ArrowRight size={18} className="text-gold transition group-hover:translate-x-1" /></a>)}</div></div>
             </div>
           </div>
         </section>
